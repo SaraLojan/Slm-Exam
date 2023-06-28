@@ -5,6 +5,10 @@ import org.springframework.web.bind.annotation.*;
     @RestController
     @RequestMapping("/api")
     public class StringModifyController {
+
+        static String message;
+        private static int lastLength = 0;
+
         @GetMapping("/modify")
         public String modifyString(String string){
             StringBuilder modifiedString = new StringBuilder();
@@ -19,7 +23,16 @@ import org.springframework.web.bind.annotation.*;
 
                 modifiedString.append(currentChar);
             }
+            message = modifiedString.toString();
+            lastLength = message.length();
+            return message;
 
-            return modifiedString.toString();
+            //return modifiedString.toString();
+
         }
+        @GetMapping("/length")
+        public int getLastLength(){
+            return lastLength;
+        }
+
     }
